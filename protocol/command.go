@@ -2,7 +2,7 @@ package protocol
 
 import "errors"
 
-var UnkownCommand = errors.New("Unkown Command")
+var UnknownCommand = errors.New("UnknownCommand")
 
 type SendCmd struct {
 	Message string

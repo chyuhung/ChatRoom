@@ -14,7 +14,7 @@ type Reader struct {
 func NewReader(reader io.Reader) *Reader {
 	return &Reader{reader: bufio.NewReader(reader)}
 }
-func (r *Reader) Reade() (interface{}, error) {
+func (r *Reader) Read() (interface{}, error) {
 	cmd, err := r.reader.ReadString(' ')
 	if err != nil {
 		return nil, err
@@ -43,15 +43,15 @@ func (r *Reader) Reade() (interface{}, error) {
 		}
 		return MessCmd{user[:len(user)-1], message[:len(message)-1]}, nil
 	default:
-		log.Printf("UnknowCommand:v%", cmd)
+		log.Printf("UnknownCommand:%v", cmd)
 	}
-	return nil, UnkownCommand
+	return nil, UnknownCommand
 }
 
 func (r *Reader) ReadAll() ([]interface{}, error) {
-	commands := []interface{}{}
+	var commands []interface{}
 	for {
-		command, err := r.Reade()
+		command, err := r.Read()
 		if command != nil {
 			commands = append(commands, command)
 		}

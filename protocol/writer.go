@@ -30,7 +30,7 @@ func (w *Writer) Write(command interface{}) error {
 	case MessCmd:
 		err = w.WriteString(fmt.Sprintf("MESS %v %v\n", v.Name, v.Message))
 	default:
-		err = UnkownCommand
+		err = UnknownCommand
 	}
 	return err
 }
