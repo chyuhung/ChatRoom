@@ -20,19 +20,21 @@ func (r *Reader) Read() (interface{}, error) {
 		return nil, err
 	}
 	switch cmd {
-	case "SEND":
+	//ReadString reads until the first occurrence of delim in the input,
+	//returning a string containing the data up to and including the delimiter.
+	case "SEND ":
 		message, err := r.reader.ReadString('\n')
 		if err != nil {
 			return nil, err
 		}
 		return SendCmd{message[:len(message)-1]}, nil
-	case "NAME":
+	case "NAME ":
 		name, err := r.reader.ReadString('\n')
 		if err != nil {
 			return nil, err
 		}
 		return NameCmd{name[:len(name)-1]}, nil
-	case "MESS":
+	case "MESS ":
 		user, err := r.reader.ReadString(' ')
 		if err != nil {
 			return nil, err
